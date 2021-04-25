@@ -97,6 +97,7 @@ Rails.application.routes.draw do
   namespace :partners do
     resources :vaccination_centers, only: [:index, :show, :new, :create] do
       resources :campaigns, only: [:new, :create] do
+        get "creator", on: :new
         post :simulate_reach, on: :collection
       end
     end

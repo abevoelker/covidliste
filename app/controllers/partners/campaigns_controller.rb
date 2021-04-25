@@ -18,6 +18,10 @@ module Partners
       @campaign = @vaccination_center.campaigns.build(starts_at: Time.now, ends_at: 1.hour.from_now)
     end
 
+    def campaign_creator
+      @campaign = @vaccination_center.build_campaign_smart_defaults
+    end
+
     def create
       @campaign = @vaccination_center.campaigns.build(create_params)
       @campaign.partner = current_partner
@@ -48,8 +52,9 @@ module Partners
       campaign = Campaign.new(simulate_params.merge({vaccination_center: @vaccination_center}))
       reach = campaign.reachable_users_query.count
       render json: {
-        reach: Rails.env.production? ? reach : 1,
-        enough: reach >= (Vaccine.minimum_reach_to_dose_ratio(vaccine_type) * available_doses)
+        reach: reach,
+        enough: reach >= (Vaccine.minimum_reach_to_dose_ratio(vaccine_type) * available_doses),
+        minimum_reach_to_dose_ratio: Vaccine.minimum_reach_to_dose_ratio(vaccine_type)
       }
     end
 

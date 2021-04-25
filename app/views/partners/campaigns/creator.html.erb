@@ -1,0 +1,11 @@
+<%= content_for(:append_to_head) do %>
+  <meta content="index;follow" name="robots"/>
+  <%= javascript_pack_tag "partners", "data-turbolinks-track": "reload", defer: !Rails.env.test?, nonce: true %>
+<% end %>
+<div class="container">
+  <%= render "components/page_title", title: "Lancer une campagne" %>
+
+  <h1>Yoloswag</h1>
+  <%= react_component("CampaignCreator", props: {name: "swag"}, prerender: false) %>
+
+</div>
