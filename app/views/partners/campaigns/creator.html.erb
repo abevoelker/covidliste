@@ -4,8 +4,5 @@
 <% end %>
 <div class="container mt-5">
   <%= render "components/page_title", title: "Lancer une campagne", icon_name: "paper-plane" %>
-
-  <h1>Yoloswag</h1>
-  <%= react_component("CampaignCreator", props: {name: "swag"}, prerender: false) %>
-
+  <%= react_component("CampaignCreator", props: {vaccination_center: @vaccination_center, initial_campaign: @campaign}, prerender: false) %>
 </div>
