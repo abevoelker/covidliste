@@ -7,7 +7,8 @@ class Partner < ApplicationRecord
     :rememberable,
     :validatable,
     :confirmable,
-    :zxcvbnable
+    :zxcvbnable,
+    :omniauthable, omniauth_providers: [:pro_sante_connect]
 
   validates :name, presence: true
   validates :phone_number, presence: true
